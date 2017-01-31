@@ -15,6 +15,8 @@ class CreateSaucesTable extends Migration
     {
         Schema::create('sauces', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->double('price');
             $table->timestamps();
         });
     }

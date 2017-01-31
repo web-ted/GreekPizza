@@ -15,6 +15,8 @@ class CreateCheesesTable extends Migration
     {
         Schema::create('cheeses', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->double('price');
             $table->timestamps();
         });
     }

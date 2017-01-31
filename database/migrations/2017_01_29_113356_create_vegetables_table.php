@@ -15,6 +15,8 @@ class CreateVegetablesTable extends Migration
     {
         Schema::create('vegetables', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->double('price');
             $table->timestamps();
         });
     }
