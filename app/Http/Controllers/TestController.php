@@ -10,6 +10,6 @@ class TestController extends Controller
     public function test()
     {
         $result = Pizza::find(1)->meats()->get();
-        dd($result->toArray());
+        return view('test.test', compact('result'));
     }
 }
