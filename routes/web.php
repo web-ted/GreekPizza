@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/order/index', 'OrderController@index');
 Route::get('/test', 'TestController@test');
