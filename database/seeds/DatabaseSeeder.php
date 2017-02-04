@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         DB::table('sauces')->insert(['name' => 'tomato sauce', 'price' => 0.5, 'created_at' => date("Y-m-d H:i:s")]);
         DB::table('sauces')->insert(['name' => 'spicy sauce', 'price' => 0.8, 'created_at' => date("Y-m-d H:i:s")]);
 
-        // Create a pizza that has it all
+        // Create a pizzas that has it all
         DB::table('pizzas')->insert([
             'id'         => 1,
             'name'       => 'Special',
