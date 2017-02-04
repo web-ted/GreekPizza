@@ -4,9 +4,8 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li class="active">Meats</li>
-                <li class="active">Edit</li>
-                <li class="active">{{$meat->name}}</li>
+                <li class="active"><a href="/sauce">Sauces Index</a></li>
+                <li class="active"><a href="/sauce/add">Add</a></li>
             </ol>
         </div>
         <div class="row">
@@ -15,20 +14,20 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h5>Meat Properties Edit</h5>
+                                <h5>Sauce Properties Edit</h5>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form action="/meat/update/{{$meat->id}}" method="post" class="form">
+                        <form action="/sauce/create" method="post" class="form">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="meat_name">Name*</label>
-                                <input type="text" id="meat_name" name="name" required value="{{$meat->name}}" class="form-control">
+                                <label for="sauce_name">Name*</label>
+                                <input type="text" id="sauce_name" name="name" required class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="meat_price">Price*</label>
-                                <input type="number" step="0.01" min="0.01" name="price" required value="{{$meat->price}}" id="meat_price" class="form-control">
+                                <label for="sauce_price">Price*</label>
+                                <input type="number" step="0.01" min="0.01" name="price" required id="sauce_price" class="form-control">
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Reset Form" class="btn btn-info">

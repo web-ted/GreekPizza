@@ -4,19 +4,19 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li class="active"><a href="/meat">Meats Index</a></li>
+                <li class="active"><a href="/vegetable">Vegetables Index</a></li>
             </ol>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-4">
-                        <h5>Meats Index</h5>
+                        <h5>Vegetables Index</h5>
                     </div>
                     <div class="col-md-offset-6 col-md-2">
-                        <a class="btn btn-sm btn-success pull-right" href="/meat/add">
+                        <a class="btn btn-sm btn-success pull-right" href="/vegetable/add">
                             <span class="glyphicon glyphicon-plus"></span>
-                            Add New Meat
+                            Add New Vegetable
                         </a>
                     </div>
                 </div>
@@ -32,16 +32,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($meats as $meat)
+                        @foreach ($vegetables as $vegetable)
                             <tr>
-                                <td>{{$meat->id}}</td>
-                                <td>{{$meat->name}}</td>
-                                <td>{{$meat->price}} &euro;</td>
+                                <td>{{$vegetable->id}}</td>
+                                <td>{{$vegetable->name}}</td>
+                                <td>{{$vegetable->price}} &euro;</td>
                                 <td>
-                                    <a href="/meat/edit/{{$meat->id}}" class="btn btn-sm btn-primary">
+                                    <a href="/vegetable/edit/{{$vegetable->id}}" class="btn btn-sm btn-primary">
                                         Edit
                                     </a>
-                                    <a href="/meat/delete/{{$meat->id}}" class="btn btn-sm btn-danger">
+                                    <a href="/vegetable/delete/{{$vegetable->id}}" class="btn btn-sm btn-danger">
                                         Delete
                                     </a>
                                 </td>

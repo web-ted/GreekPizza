@@ -4,19 +4,19 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li class="active"><a href="/meat">Meats Index</a></li>
+                <li class="active"><a href="/pizza">Pizzas Index</a></li>
             </ol>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-4">
-                        <h5>Meats Index</h5>
+                        <h5>Pizzas Index</h5>
                     </div>
                     <div class="col-md-offset-6 col-md-2">
-                        <a class="btn btn-sm btn-success pull-right" href="/meat/add">
+                        <a class="btn btn-sm btn-success pull-right" href="/pizza/add">
                             <span class="glyphicon glyphicon-plus"></span>
-                            Add New Meat
+                            Add New Pizza
                         </a>
                     </div>
                 </div>
@@ -27,21 +27,37 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Meats</th>
+                        <th>Cheeses</th>
+                        <th>Vegetables</th>
+                        <th>Sauces</th>
                         <th>Price</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($meats as $meat)
+                        @foreach ($pizzas as $pizza)
                             <tr>
-                                <td>{{$meat->id}}</td>
-                                <td>{{$meat->name}}</td>
-                                <td>{{$meat->price}} &euro;</td>
+                                <td>{{$pizza->id}}</td>
+                                <td>{{$pizza->name}}</td>
                                 <td>
-                                    <a href="/meat/edit/{{$meat->id}}" class="btn btn-sm btn-primary">
+                                    {{$pizza->ingredients()['meats']}}
+                                </td>
+                                <td>
+                                    {{$pizza->ingredients()['cheeses']}}
+                                </td>
+                                <td>
+                                    {{$pizza->ingredients()['vegetables']}}
+                                </td>
+                                <td>
+                                    {{$pizza->ingredients()['sauces']}}
+                                </td>
+                                <td>{{$pizza->price}} &euro;</td>
+                                <td>
+                                    <a href="/pizza/edit/{{$pizza->id}}" class="btn btn-sm btn-primary">
                                         Edit
                                     </a>
-                                    <a href="/meat/delete/{{$meat->id}}" class="btn btn-sm btn-danger">
+                                    <a href="/pizza/delete/{{$pizza->id}}" class="btn btn-sm btn-danger">
                                         Delete
                                     </a>
                                 </td>

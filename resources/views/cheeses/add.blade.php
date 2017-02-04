@@ -4,9 +4,8 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li class="active">Meats</li>
-                <li class="active">Edit</li>
-                <li class="active">{{$meat->name}}</li>
+                <li class="active"><a href="/cheese">Cheeses Index</a></li>
+                <li class="active"><a href="/cheese/add">Add</a></li>
             </ol>
         </div>
         <div class="row">
@@ -15,20 +14,20 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h5>Meat Properties Edit</h5>
+                                <h5>Cheese Properties Edit</h5>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form action="/meat/update/{{$meat->id}}" method="post" class="form">
+                        <form action="/cheese/create" method="post" class="form">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="meat_name">Name*</label>
-                                <input type="text" id="meat_name" name="name" required value="{{$meat->name}}" class="form-control">
+                                <label for="cheese_name">Name*</label>
+                                <input type="text" id="cheese_name" name="name" required class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="meat_price">Price*</label>
-                                <input type="number" step="0.01" min="0.01" name="price" required value="{{$meat->price}}" id="meat_price" class="form-control">
+                                <label for="cheese_price">Price*</label>
+                                <input type="number" step="0.01" min="0.01" name="price" required id="cheese_price" class="form-control">
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Reset Form" class="btn btn-info">
