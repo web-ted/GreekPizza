@@ -9,7 +9,7 @@ class TestController extends Controller
 {
     public function test()
     {
-        $meats = Pizza::find(1)->meats()->get();
+        $meats = Pizza::find(1)->vegetables()->get();
         return view('test.test', compact('meats'));
     }
 }
