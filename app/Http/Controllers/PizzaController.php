@@ -34,21 +34,21 @@ class PizzaController extends Controller
         $pizza->name = $request->get('name');
         $ingredients = $request->get('ingredients');
 
-        /*foreach ($ingredients['meat'] as $ingredient) {
-            $pizza->meats()->save([
+        // dd($ingredients); die;
+        $pizza->meats()->sync(array_values($ingredients['meat']));
+        $pizza->cheeses()->sync(array_values($ingredients['cheese']));
+        $pizza->vegetables()->sync(array_values($ingredients['vegetable']));
+        $pizza->sauces()->sync(array_values($ingredients['sauce']));
 
-            ]);
-
-        }*/
         $pizza->save();
 
-        return redirect('pizzas');
+        return redirect('pizza');
     }
 
     public function delete($id)
     {
         Pizza::destroy($id);
-        return redirect('pizzas');
+        return redirect('pizza');
     }
 
     public function add()
@@ -65,9 +65,16 @@ class PizzaController extends Controller
     {
         $pizza = new Pizza();
         $pizza->name = $request->get('name');
-        $pizza->price = $request->get('price');
+        $ingredients = $request->get('ingredients');
+
+        // dd($ingredients); die;
+        $pizza->meats()->sync(array_values($ingredients['meat']));
+        $pizza->cheeses()->sync(array_values($ingredients['cheese']));
+        $pizza->vegetables()->sync(array_values($ingredients['vegetable']));
+        $pizza->sauces()->sync(array_values($ingredients['sauce']));
+
         $pizza->save();
 
-        return redirect('pizzas');
+        return redirect('pizza');
     }
 }
