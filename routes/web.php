@@ -10,9 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'TestController@test');
-Route::get('/test', 'TestController@test');
-
+Route::get('/', 'HomeController@index');
 
 // Meats controller routes
 Route::get('/meat', 'MeatController@index');
@@ -59,3 +57,11 @@ Route::get('/pizza/delete/{id}', 'PizzaController@delete');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
