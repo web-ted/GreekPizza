@@ -61,13 +61,21 @@ Route::get('/customer/add', 'CustomerController@add');
 Route::post('/customer/create', 'CustomerController@create');
 Route::get('/customer/delete/{id}', 'CustomerController@delete');
 
-// Customers controller routes
+// Orders controller routes
 Route::get('/order', 'OrderController@index');
 Route::get('/order/edit/{id}', 'OrderController@edit');
 Route::post('/order/update/{id}', 'OrderController@update');
 Route::get('/order/add', 'OrderController@add');
 Route::post('/order/create', 'OrderController@create');
 Route::get('/order/delete/{id}', 'OrderController@delete');
+
+// Employees controller routes
+Route::get('/employee', 'EmployeeController@index');
+Route::get('/employee/edit/{id}', 'EmployeeController@edit');
+Route::post('/employee/update/{id}', 'EmployeeController@update');
+Route::get('/employee/add', 'EmployeeController@add');
+Route::post('/employee/create', 'EmployeeController@create');
+Route::get('/employee/delete/{id}', 'EmployeeController@delete');
 
 
 Auth::routes();
