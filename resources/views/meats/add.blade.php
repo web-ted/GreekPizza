@@ -14,7 +14,7 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h5>Meat Properties Edit</h5>
+                                <h5>New Meat Properties</h5>
                             </div>
                         </div>
                     </div>

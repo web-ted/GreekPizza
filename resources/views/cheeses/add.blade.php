@@ -14,7 +14,7 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h5>Cheese Properties Edit</h5>
+                                <h5>New Cheese Properties</h5>
                             </div>
                         </div>
                     </div>

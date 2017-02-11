@@ -14,7 +14,7 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h5>Sauce Properties Edit</h5>
+                                <h5>New Sauce Properties</h5>
                             </div>
                         </div>
                     </div>
