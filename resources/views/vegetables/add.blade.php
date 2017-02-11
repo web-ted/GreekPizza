@@ -14,7 +14,7 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h5>Vegetable Properties Edit</h5>
+                                <h5>New Vegetable Properties</h5>
                             </div>
                         </div>
                     </div>
