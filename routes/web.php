@@ -62,12 +62,12 @@ Route::post('/customer/create', 'CustomerController@create');
 Route::get('/customer/delete/{id}', 'CustomerController@delete');
 
 // Customers controller routes
-Route::get('/order', 'CustomerController@index');
-Route::get('/order/edit/{id}', 'CustomerController@edit');
-Route::post('/order/update/{id}', 'CustomerController@update');
-Route::get('/order/add', 'CustomerController@add');
-Route::post('/order/create', 'CustomerController@create');
-Route::get('/order/delete/{id}', 'CustomerController@delete');
+Route::get('/order', 'OrderController@index');
+Route::get('/order/edit/{id}', 'OrderController@edit');
+Route::post('/order/update/{id}', 'OrderController@update');
+Route::get('/order/add', 'OrderController@add');
+Route::post('/order/create', 'OrderController@create');
+Route::get('/order/delete/{id}', 'OrderController@delete');
 
 
 Auth::routes();
