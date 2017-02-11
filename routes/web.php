@@ -53,6 +53,14 @@ Route::get('/pizza/add', 'PizzaController@add');
 Route::post('/pizza/create', 'PizzaController@create');
 Route::get('/pizza/delete/{id}', 'PizzaController@delete');
 
+// Customers controller routes
+Route::get('/customer', 'CustomerController@index');
+Route::get('/customer/edit/{id}', 'CustomerController@edit');
+Route::post('/customer/update/{id}', 'CustomerController@update');
+Route::get('/customer/add', 'CustomerController@add');
+Route::post('/customer/create', 'CustomerController@create');
+Route::get('/customer/delete/{id}', 'CustomerController@delete');
+
 
 
 
