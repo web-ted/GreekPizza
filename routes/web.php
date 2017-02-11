@@ -61,14 +61,14 @@ Route::get('/customer/add', 'CustomerController@add');
 Route::post('/customer/create', 'CustomerController@create');
 Route::get('/customer/delete/{id}', 'CustomerController@delete');
 
+// Customers controller routes
+Route::get('/order', 'CustomerController@index');
+Route::get('/order/edit/{id}', 'CustomerController@edit');
+Route::post('/order/update/{id}', 'CustomerController@update');
+Route::get('/order/add', 'CustomerController@add');
+Route::post('/order/create', 'CustomerController@create');
+Route::get('/order/delete/{id}', 'CustomerController@delete');
 
-
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
