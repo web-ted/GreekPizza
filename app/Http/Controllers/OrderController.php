@@ -30,8 +30,9 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        $order->name = $request->get('name');
-        $order->price = $request->get('price');
+        $order->customer_id = $request->get('customer_id');
+        $order->pizza_id = $request->get('pizza_id');
+        $order->employee_id = $request->get('employee_id');
         $order->save();
 
         return redirect('order');
@@ -55,8 +56,9 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $order = new Order();
-        $order->name = $request->get('name');
-        $order->price = $request->get('price');
+        $order->customer_id = $request->get('customer_id');
+        $order->pizza_id = $request->get('pizza_id');
+        $order->employee_id = $request->get('employee_id');
         $order->save();
 
         return redirect('order');

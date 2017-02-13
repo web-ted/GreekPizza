@@ -30,15 +30,16 @@
                         <th>Employee</th>
                         <th>Pizza</th>
                         <th>Order Date</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($orders as $order)
                         <tr>
                             <td>{{$order->id}}</td>
-                            <td>{{$order->customer()->name}}</td>
-                            <td>{{$order->employee()->name}}</td>
-                            <td>{{$order->pizza()->name}}</td>
+                            <td>{{$order->customer()->first()->firstname}} {{$order->customer()->first()->lastname}}</td>
+                            <td>{{$order->employee()->first()->firstname}} {{$order->employee()->first()->lastname}}</td>
+                            <td>{{$order->pizza()->first()->name}}</td>
                             <td>{{$order->created_at}}</td>
                             <td>
                                 <a href="/order/edit/{{$order->id}}" class="btn btn-sm btn-primary">

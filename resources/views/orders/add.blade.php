@@ -5,8 +5,7 @@
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
                 <li class="active"><a href="/order">Orders</a></li>
-                <li class="active"><a href="/order/edit/{{$order->id}}">Edit</a></li>
-                <li class="active">{{$order->id}}</li>
+                <li class="active">Add</li>
             </ol>
         </div>
         <div class="row">
@@ -15,19 +14,19 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h5>Order Properties Edit</h5>
+                                <h5>New Order Properties</h5>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form action="/order/update/{{$order->id}}" method="post" class="form">
+                        <form action="/order/create" method="post" class="form">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="order_customer_id">Customer*</label>
                                 <select class="form-control" name="customer_id" id="order_customer_id">
                                     <option value="">Select a customer...</option>
                                     @foreach($customers as $customer)
-                                        <option value="{{$customer->id}}" {{($order->customer_id == $customer->id)?'selected':''}}>
+                                        <option value="{{$customer->id}}">
                                             {{$customer->firstname}} {{$customer->lastname}}
                                         </option>
                                     @endforeach
@@ -38,7 +37,7 @@
                                 <select class="form-control" name="employee_id" id="order_employee_id">
                                     <option value="">Select a employee...</option>
                                     @foreach($employees as $employee)
-                                        <option value="{{$employee->id}}" {{($order->employee_id == $employee->id)?'selected':''}}>
+                                        <option value="{{$employee->id}}">
                                             {{$employee->firstname}} {{$employee->lastname}}
                                         </option>
                                     @endforeach
@@ -50,7 +49,7 @@
                                 <select class="form-control" name="pizza_id" id="order_pizza_id">
                                     <option value="">Select a pizza...</option>
                                     @foreach($pizzas as $pizza)
-                                        <option value="{{$pizza->id}}" {{($order->pizza_id == $pizza->id)?'selected':''}}>
+                                        <option value="{{$pizza->id}}">
                                             {{$pizza->name}}
                                         </option>
                                     @endforeach
