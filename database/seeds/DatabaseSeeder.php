@@ -56,5 +56,93 @@ class DatabaseSeeder extends Seeder
         DB::table('vegetable_pizza')->insert(['pizza_id' => 1, 'vegetable_id' => 4]);
 
         DB::table('sauce_pizza')->insert(['pizza_id' => 1, 'sauce_id' => 1]);
+
+        DB::table('employees')->insert([
+            'id'           => 1,
+            'firstname'    => 'Delivery',
+            'lastname'     => 'Boy',
+            'email'        => 'deliver@funnypizza.com',
+            'birth_date'   => '1980-01-20',
+            'hire_date'    => '2000-03-15',
+            'job'          => 'Home Delivery',
+            'address'      => '21st Jump Str.',
+            'city'         => 'Thessaloniki',
+            'region'       => 'Center',
+            'postalcode'   => '56224',
+            'country'      => 'Greece',
+            'phone'        => '2310255258',
+            'mobile_phone' => '6900112233',
+            'nickname'     => 'pinezas',
+            'password'     => '12345678',
+        ]);
+
+        DB::table('employees')->insert([
+            'id'           => 2,
+            'firstname'    => 'Ιωάννης',
+            'lastname'     => 'Σπασοκλαμπάνιας',
+            'email'        => 'ispaso@funnypizza.com',
+            'birth_date'   => '1956-02-09',
+            'hire_date'    => '2000-01-01',
+            'job'          => 'Home Delivery',
+            'address'      => 'Κολοπετινίτσας 23',
+            'city'         => 'Θεσσαλονίκη',
+            'region'       => 'Κέντρο',
+            'postalcode'   => '56224',
+            'country'      => 'Ελλάδα',
+            'phone'        => '2310255258',
+            'mobile_phone' => '6900112233',
+            'nickname'     => 'Σπάσο',
+            'password'     => '12345678',
+        ]);
+
+        DB::table('customers')->insert([
+            'id'           => 1,
+            'firstname'    => 'Marika',
+            'lastname'     => 'Pentagiwtissa',
+            'birth_date'   => '1978-06-05',
+            'address'      => 'Chalkidas 28',
+            'city'         => 'Giannitsa',
+            'region'       => 'Central Macedonia',
+            'postalcode'   => '60100',
+            'country'      => 'Greece',
+            'phone'        => '2352065412',
+            'mobile_phone' => '6936452010',
+            'nickname'     => 'marika',
+            'email'        => 'marikap@gmail.com',
+            'password'     => '12345678',
+        ]);
+
+        DB::table('customers')->insert([
+            'id'           => 2,
+            'firstname'    => 'Argirw',
+            'lastname'     => 'Swtiriadou',
+            'birth_date'   => '1985-06-05',
+            'address'      => 'Isminis 28',
+            'city'         => 'Ptolemaida',
+            'region'       => 'East Macedonia',
+            'postalcode'   => '60100',
+            'country'      => 'Greece',
+            'phone'        => '2353023565',
+            'mobile_phone' => '6938452131',
+            'nickname'     => 'aswtiriadou',
+            'email'        => 'aswtiriadou@gmail.com',
+            'password'     => '12345678',
+        ]);
+
+
+        DB::table('orders')->insert([
+            'id'          => 1,
+            'customer_id' => 1,
+            'employee_id' => 1,
+            'pizza_id'    => 1,
+        ]);
+
+        DB::table('users')->insert([
+            'id'       => 1,
+            'name'     => 'Thodoris Goltsios',
+            'email'    => 'tgoltsios@gmail.com',
+            'password' => Hash::make('12345678'),
+            // 'remember_token' => '',
+        ]);
     }
 }
