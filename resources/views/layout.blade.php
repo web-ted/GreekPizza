@@ -41,7 +41,8 @@
                 <li><a href="/cheese">Cheeses</a></li>
                 <li><a href="/sauce">Sauces</a></li>
                 <li><a href="/customer">Customers</a></li>
-                <li><a href="/order">Order</a></li>
+                <li><a href="/order">Orders</a></li>
+                <li><a href="/employee">Employees</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
