@@ -81,3 +81,4 @@ Route::get('/employee/delete/{id}', 'EmployeeController@delete');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/about', 'HomeController@about');

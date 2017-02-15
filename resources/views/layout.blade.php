@@ -45,6 +45,7 @@
                 <li><a href="/customer">Customers</a></li>
                 <li><a href="/employee">Employees</a></li>
                 @endif
+                <li><a href="/about">About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-offset-6 col-md-2">
                         @if(Auth::user()->role == 'admin')
-                            <a class="btn btn-sm btn-success pull-right" href="/meat/add">
+                            <a class="btn btn-sm btn-success pull-right" href="/cheese/add">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 Add New Cheese
                             </a>

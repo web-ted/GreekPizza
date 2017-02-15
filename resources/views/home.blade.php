@@ -15,15 +15,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <p>Welcome to the new Greek Pizza web application. On the top meu you can browse to the application components.
-                    You can create new Pizzas, add new ingredients and make orders. You can also manage customers and employees.</p>
-                <p>The Greek Pizza was built using the following technologies:</p>
-                <ul>
-                    <li><a href="http://php.net/">PHP 7.0</a></li>
-                    <li><a href="https://www.mysql.com/">MySQL Ver 5.7.17</a></li>
-                    <li><a href="https://laravel.com/">Laravel PHP Framewok 5.4</a></li>
-                    <li><a href="https://getcomposer.org/">Composer Dependency Manager for PHP version 1.3.2</a></li>
-                </ul>
+                <img src="img/greek_pizza_logo.jpg" class="img-responsive center-block" alt="Responsive image">
             </div>
         </div>
     </div>

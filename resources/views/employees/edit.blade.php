@@ -33,10 +33,6 @@
                                         <input type="text" id="employee_last_name" name="lastname" value="{{$employee->lastname}}" required class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="employee_birth_date">Birth Date</label>
-                                        <input type="date" id="employee_birth_date" name="birth_date" value="{{$employee->birth_date}}" class="form-control">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="employee_phone">Phone*</label>
                                         <input type="text" required id="employee_phone" name="phone" value="{{$employee->phone}}" class="form-control">
                                     </div>
