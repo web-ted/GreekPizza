@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Customer;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -48,9 +49,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'firstname'    => 'required|max:255',
+            'lastname'     => 'required|max:255',
+            'phone'        => 'required|max:15',
+            'mobile_phone' => 'max:15',
+            'email'        => 'required|email|max:255|unique:users',
+            'password'     => 'required|min:6|confirmed',
         ]);
     }
 
@@ -62,11 +66,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name'     => $data['name'],
+        $user = User::create([
+            'name'     => $data['firstname'] . ' ' . $data['lastname'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
             'role'     => 'customer',
         ]);
+
+        Customer::create([
+            'firstname'    => $data['firstname'],
+            'lastname'     => $data['lastname'],
+            'phone'        => $data['phone'],
+            'mobile_phone' => $data['mobile_phone'],
+            'nickname'     => $data['nickname'],
+            'address'      => $data['address'],
+            'city'         => $data['city'],
+            'region'       => $data['region'],
+            'postalcode'   => $data['postalcode'],
+            'country'      => $data['country'],
+            'user_id'      => $user->id,
+        ]);
+
+        return $user;
     }
 }
