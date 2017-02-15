@@ -14,10 +14,12 @@
                         <h5>Pizzas Index</h5>
                     </div>
                     <div class="col-md-offset-6 col-md-2">
-                        <a class="btn btn-sm btn-success pull-right" href="/pizza/add">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Add New Pizza
-                        </a>
+                        @if(Auth::user()->role != 'employee')
+                            <a class="btn btn-sm btn-success pull-right" href="/pizza/add">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Add New Pizza
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -33,33 +35,33 @@
                         <th>Sauces</th>
                         <th>Price</th>
                         @if(Auth::user()->role == 'admin')
-                        <th>User</th>
+                            <th>User</th>
                         @endif
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pizzas as $pizza)
-                            <tr>
-                                <td>{{$pizza->id}}</td>
-                                <td>{{$pizza->name}}</td>
-                                <td>
-                                    {{$pizza->ingredients()['meats']}}
-                                </td>
-                                <td>
-                                    {{$pizza->ingredients()['cheeses']}}
-                                </td>
-                                <td>
-                                    {{$pizza->ingredients()['vegetables']}}
-                                </td>
-                                <td>
-                                    {{$pizza->ingredients()['sauces']}}
-                                </td>
-                                <td>{{$pizza->price}} &euro;</td>
-                                @if(Auth::user()->role == 'admin')
-                                    <td>{{$pizza->user()->first()->name}}</td>
-                                @endif
-                                @if(Auth::user()->role == 'admin' || $pizza->user_id == Auth::user()->id)
+                    @foreach ($pizzas as $pizza)
+                        <tr>
+                            <td>{{$pizza->id}}</td>
+                            <td>{{$pizza->name}}</td>
+                            <td>
+                                {{$pizza->ingredients()['meats']}}
+                            </td>
+                            <td>
+                                {{$pizza->ingredients()['cheeses']}}
+                            </td>
+                            <td>
+                                {{$pizza->ingredients()['vegetables']}}
+                            </td>
+                            <td>
+                                {{$pizza->ingredients()['sauces']}}
+                            </td>
+                            <td>{{$pizza->price}} &euro;</td>
+                            @if(Auth::user()->role == 'admin')
+                                <td>{{$pizza->user()->first()->name}}</td>
+                            @endif
+                            @if(Auth::user()->role == 'admin' || $pizza->user_id == Auth::user()->id)
                                 <td>
                                     <a href="/pizza/edit/{{$pizza->id}}" class="btn btn-sm btn-primary">
                                         Edit
@@ -68,11 +70,11 @@
                                         Delete
                                     </a>
                                 </td>
-                                @else
-                                    <td>Store's Product</td>
-                                @endif
-                            </tr>
-                        @endforeach
+                            @else
+                                <td>Store's Product</td>
+                            @endif
+                        </tr>
+                    @endforeach
                     </tbody>
 
                 </table>
