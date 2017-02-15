@@ -14,10 +14,12 @@
                         <h5>Sauces Index</h5>
                     </div>
                     <div class="col-md-offset-6 col-md-2">
-                        <a class="btn btn-sm btn-success pull-right" href="/sauce/add">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Add New Sauce
-                        </a>
+                        @if(Auth::user()->role == 'admin')
+                            <a class="btn btn-sm btn-success pull-right" href="/sauce/add">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Add New Sauce
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -29,17 +31,17 @@
                         <th>Name</th>
                         <th>Price</th>
                         @if(Auth::user()->role == 'admin')
-                        <th>Actions</th>
+                            <th>Actions</th>
                         @endif
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($sauces as $sauce)
-                            <tr>
-                                <td>{{$sauce->id}}</td>
-                                <td>{{$sauce->name}}</td>
-                                <td>{{$sauce->price}} &euro;</td>
-                                @if(Auth::user()->role == 'admin')
+                    @foreach ($sauces as $sauce)
+                        <tr>
+                            <td>{{$sauce->id}}</td>
+                            <td>{{$sauce->name}}</td>
+                            <td>{{$sauce->price}} &euro;</td>
+                            @if(Auth::user()->role == 'admin')
                                 <td>
                                     <a href="/sauce/edit/{{$sauce->id}}" class="btn btn-sm btn-primary">
                                         Edit
@@ -48,9 +50,9 @@
                                         Delete
                                     </a>
                                 </td>
-                                @endif
-                            </tr>
-                        @endforeach
+                            @endif
+                        </tr>
+                    @endforeach
                     </tbody>
 
                 </table>
