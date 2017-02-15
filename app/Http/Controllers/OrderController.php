@@ -13,11 +13,16 @@ class OrderController extends Controller
 {
     public function index()
     {
-        if(Auth::user()->role == 'admin') {
+        $role = Auth::user()->role;
+        if($role == 'admin') {
             $orders = Order::all();
-        } else {
+        } elseif($role == 'customer') {
             $orders = Order::where('user_id', Auth::user()->id)->get();
+        } else {
+            $employee = Employee::where('user_id', Auth::user()->id)->first();
+            $orders = Order::where('user_id', Auth::user()->id)->orWhere('employee_id', $employee->id)->get();
         }
+
         return view('orders.index', compact('orders'));
     }
 
@@ -63,8 +68,6 @@ class OrderController extends Controller
             $order->employee_id = $request->get('employee_id');
         } elseif($role == 'customer') {
             $order->customer_id = Customer::where('user_id', Auth::user()->id)->first()->id;
-        } else {
-            $order->customer_id = Employee::where('user_id', Auth::user()->id)->first()->id;
         }
 
         $order->user_id = Auth::user()->id;
@@ -115,9 +118,9 @@ class OrderController extends Controller
             $order->employee_id = $request->get('employee_id');
         } elseif($role == 'customer') {
             $order->customer_id = Customer::where('user_id', Auth::user()->id)->first()->id;
-        } else {
+        } /*else {
             $order->customer_id = Employee::where('user_id', Auth::user()->id)->first()->id;
-        }
+        }*/
 
         $order->user_id = Auth::user()->id;
         $order->save();
