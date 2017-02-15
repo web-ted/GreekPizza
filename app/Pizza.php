@@ -26,6 +26,11 @@ class Pizza extends Model
         return $this->belongsToMany('App\Cheese', 'cheese_pizza');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
     public function ingredients()
     {
         return [

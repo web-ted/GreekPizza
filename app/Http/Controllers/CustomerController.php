@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Customer;
+use App\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -12,6 +14,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        // If user is not an admin then redirect him to orders
+        if(Auth::user()->role != 'admin') {
+            return redirect('order');
+        }
         // Retrieve a list of all customers from db
         $customers = Customer::all();
 
@@ -36,6 +42,11 @@ class CustomerController extends Controller
     {
         // Find the customer with id : $id and update its properies with the posted data
         $customer = Customer::findOrFail($id);
+        $user = User::findOrFail(['email' => $customer->email]);
+        $user->update([
+            'email'    => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+        ]);
         $customer->update($request->all());
 
 
@@ -60,6 +71,11 @@ class CustomerController extends Controller
     {
         // Create a new customer using the posted data and redirect to customers index page
         $customer = Customer::create($request->all());
+        $user = User::create([
+            'email'    => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+        ]);
+
         return redirect('customer');
     }
 }

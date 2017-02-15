@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Customer;
 use App\Employee;
 use App\Order;
@@ -12,7 +13,11 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        if(Auth::user()->role == 'admin') {
+            $orders = Order::all();
+        } else {
+            $orders = Order::where('user_id', Auth::user()->id)->get();
+        }
         return view('orders.index', compact('orders'));
     }
 
@@ -20,19 +25,44 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
+        if($order->user_id != Auth::user()->id) {
+            return redirect('order');
+        }
+
         $customers = Customer::all();
         $employees = Employee::all();
-        $pizzas = Pizza::all();
+        if(Auth::user()->role == 'admin') {
+            $pizzas = Pizza::all();
+        } else {
+            $pizzas = Pizza::where('user_id', 1)->orWhere('user_id', Auth::user()->id)->get();
+        }
 
         return view('orders.edit', compact('order','customers', 'employees', 'pizzas'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'pizza_id' => 'required',
+        ]);
+
         $order = Order::findOrFail($id);
-        $order->customer_id = $request->get('customer_id');
+        if($order->user_id != Auth::user()->id) {
+            return redirect('order');
+        }
+
         $order->pizza_id = $request->get('pizza_id');
-        $order->employee_id = $request->get('employee_id');
+        $order->price = Pizza::find($request->get('pizza_id'))->price;
+        if(Auth::user()->role == 'admin') {
+            $this->validate($request, [
+                'customer_id' => 'required',
+            ]);
+            $order->customer_id = $request->get('customer_id');
+            $order->employee_id = $request->get('employee_id');
+        } else {
+            $order->customer_id = Customer::where('user_id', Auth::user()->id)->first()->id;
+        }
+        $order->user_id = Auth::user()->id;
         $order->save();
 
         return redirect('order');
@@ -40,7 +70,11 @@ class OrderController extends Controller
 
     public function delete($id)
     {
-        Order::destroy($id);
+        $order = Order::findOrFail($id);
+        if($order->user_id != Auth::user()->id) {
+            return redirect('order');
+        }
+        $order->destroy($id);
         return redirect('order');
     }
 
@@ -48,17 +82,36 @@ class OrderController extends Controller
     {
         $customers = Customer::all();
         $employees = Employee::all();
-        $pizzas = Pizza::all();
+        if(Auth::user()->role == 'admin') {
+            $pizzas = Pizza::all();
+        } else {
+            $pizzas = Pizza::where('user_id', 1)->orWhere('user_id', Auth::user()->id)->get();
+        }
 
         return view('orders.add', compact('customers', 'employees', 'pizzas'));
     }
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'pizza_id' => 'required',
+        ]);
+
         $order = new Order();
-        $order->customer_id = $request->get('customer_id');
         $order->pizza_id = $request->get('pizza_id');
-        $order->employee_id = $request->get('employee_id');
+        $order->price = Pizza::find($request->get('pizza_id'))->price;
+
+        if(Auth::user()->role == 'admin') {
+            $this->validate($request, [
+                'customer_id' => 'required',
+            ]);
+            $order->customer_id = $request->get('customer_id');
+            $order->employee_id = $request->get('employee_id');
+        } else {
+            $order->customer_id = Customer::where('user_id', Auth::user()->id)->first()->id;
+        }
+
+        $order->user_id = Auth::user()->id;
         $order->save();
 
         return redirect('order');

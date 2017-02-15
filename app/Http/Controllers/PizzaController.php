@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Cheese;
 use App\Meat;
 use App\Pizza;
@@ -16,8 +17,13 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        // Select all pizzas from the db
-        $pizzas = Pizza::all();
+        // Select all pizzas from the db if you are admin
+        if(Auth::user()->role == 'admin') {
+            $pizzas = Pizza::all();
+        } else {
+            $pizzas = Pizza::where('user_id',1)->orWhere('user_id', Auth::user()->id)->get();
+        }
+
 
         // Set as view file views/pizza/index.blade.php and pass it all pizzas as $pizza var
         return view('pizzas.index', compact('pizzas'));
@@ -32,6 +38,10 @@ class PizzaController extends Controller
     {
         // Find pizza with id $id from the db
         $pizza = Pizza::findOrFail($id);
+
+        if ((Auth::user()->role != 'admin') && ($pizza->user_id != Auth::user()->id)) {
+            return redirect('/pizza');
+        }
 
         // Find all meats, cheeses, vegetables and sauces from the database
         $meats = Meat::all();
@@ -71,7 +81,7 @@ class PizzaController extends Controller
         $sum = array_sum([$pizza->meats()->sum('price'),
             $pizza->cheeses()->sum('price'),
             $pizza->vegetables()->sum('price'),
-            $pizza->sauces()->sum('price')
+            $pizza->sauces()->sum('price'),
         ]);
 
         // Set the calculated total price to the pizza model
@@ -116,11 +126,18 @@ class PizzaController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'name'        => 'required',
+            'ingredients' => 'required',
+        ]);
+
         // Instantiate a new pizza model
         $pizza = new Pizza();
 
         // Get the pizza name from the http request and set it to the model
         $pizza->name = $request->get('name');
+
+        $pizza->user_id = Auth::user()->id;
 
         // Get all the ingredients form array from the http request
         $ingredients = $request->get('ingredients');
@@ -149,7 +166,7 @@ class PizzaController extends Controller
         $sum = array_sum([$pizza->meats()->sum('price'),
             $pizza->cheeses()->sum('price'),
             $pizza->vegetables()->sum('price'),
-            $pizza->sauces()->sum('price')
+            $pizza->sauces()->sum('price'),
         ]);
 
         // Set the sum you have calculated to the model
