@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'id'         => 1,
             'name'       => 'Special',
             'price'      => 15.25,
+            'user_id'    => 1,
             'created_at' => date("Y-m-d H:i:s"),
         ]);
 
@@ -61,7 +62,6 @@ class DatabaseSeeder extends Seeder
             'id'           => 1,
             'firstname'    => 'Delivery',
             'lastname'     => 'Boy',
-            'email'        => 'deliver@funnypizza.com',
             'birth_date'   => '1980-01-20',
             'hire_date'    => '2000-03-15',
             'job'          => 'Home Delivery',
@@ -73,14 +73,13 @@ class DatabaseSeeder extends Seeder
             'phone'        => '2310255258',
             'mobile_phone' => '6900112233',
             'nickname'     => 'pinezas',
-            'password'     => '12345678',
+            'user_id'      => 5,
         ]);
 
         DB::table('employees')->insert([
             'id'           => 2,
             'firstname'    => 'Ιωάννης',
             'lastname'     => 'Σπασοκλαμπάνιας',
-            'email'        => 'ispaso@funnypizza.com',
             'birth_date'   => '1956-02-09',
             'hire_date'    => '2000-01-01',
             'job'          => 'Home Delivery',
@@ -92,24 +91,7 @@ class DatabaseSeeder extends Seeder
             'phone'        => '2310255258',
             'mobile_phone' => '6900112233',
             'nickname'     => 'Σπάσο',
-            'password'     => '12345678',
-        ]);
-
-        DB::table('customers')->insert([
-            'id'           => 1,
-            'firstname'    => 'Marika',
-            'lastname'     => 'Pentagiwtissa',
-            'birth_date'   => '1978-06-05',
-            'address'      => 'Chalkidas 28',
-            'city'         => 'Giannitsa',
-            'region'       => 'Central Macedonia',
-            'postalcode'   => '60100',
-            'country'      => 'Greece',
-            'phone'        => '2352065412',
-            'mobile_phone' => '6936452010',
-            'nickname'     => 'marika',
-            'email'        => 'marikap@gmail.com',
-            'password'     => '12345678',
+            'user_id'      => 4,
         ]);
 
         DB::table('customers')->insert([
@@ -125,8 +107,23 @@ class DatabaseSeeder extends Seeder
             'phone'        => '2353023565',
             'mobile_phone' => '6938452131',
             'nickname'     => 'aswtiriadou',
-            'email'        => 'aswtiriadou@gmail.com',
-            'password'     => '12345678',
+            'user_id'      => 2,
+        ]);
+
+        DB::table('customers')->insert([
+            'id'           => 1,
+            'firstname'    => 'Marika',
+            'lastname'     => 'Pentagiwtissa',
+            'birth_date'   => '1978-06-05',
+            'address'      => 'Chalkidas 28',
+            'city'         => 'Giannitsa',
+            'region'       => 'Central Macedonia',
+            'postalcode'   => '60100',
+            'country'      => 'Greece',
+            'phone'        => '2352065412',
+            'mobile_phone' => '6936452010',
+            'nickname'     => 'marika',
+            'user_id'      => 3,
         ]);
 
 
@@ -135,14 +132,57 @@ class DatabaseSeeder extends Seeder
             'customer_id' => 1,
             'employee_id' => 1,
             'pizza_id'    => 1,
+            'price'       => 15.25,
+            'user_id'     => 1,
+            'created_at'  => date("Y-m-d H:i:s"),
         ]);
 
         DB::table('users')->insert([
             'id'       => 1,
-            'name'     => 'Thodoris Goltsios',
-            'email'    => 'tgoltsios@gmail.com',
+            'name'     => 'Administrator',
+            'email'    => 'admin@greekpizza.com',
+            'password' => Hash::make('admin'),
+            'role'     => 'admin',
+        ]);
+
+        DB::table('users')->insert([
+            'id'       => 2,
+            'name'     => 'Argirw Swtiriadou',
+            'email'    => 'aswti@gmail.com',
             'password' => Hash::make('12345678'),
-            // 'remember_token' => '',
+            'role'     => 'customer',
+        ]);
+
+        DB::table('users')->insert([
+            'id'       => 3,
+            'name'     => 'Marika Pentagiwtissa',
+            'email'    => 'marikap@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role'     => 'customer',
+        ]);
+
+        DB::table('users')->insert([
+            'id'       => 4,
+            'name'     => 'Ιωάννης Σπασοκλαμπάνιας',
+            'email'    => 'ispaso@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role'     => 'employee',
+        ]);
+
+        DB::table('users')->insert([
+            'id'       => 5,
+            'name'     => 'Delivery Boy',
+            'email'    => 'dboy@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role'     => 'employee',
+        ]);
+
+        DB::table('users')->insert([
+            'id'       => 6,
+            'name'     => 'Κώστας Σκλήρης',
+            'email'    => 'kwnssk@gmail.com',
+            'password' => Hash::make('123456'),
+            'role'     => 'admin',
         ]);
     }
 }
