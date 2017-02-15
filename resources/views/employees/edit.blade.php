@@ -74,11 +74,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="employee_email_address">E-mail Address*</label>
-                                <input type="email" required id="employee_email_address" name="email" value="{{$employee->email}}" required class="form-control">
+                                <input type="email" required id="employee_email_address" name="email" value="{{$employee->user()->first()->email}}" required class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="employee_password">Password*</label>
-                                <input type="password" required id="employee_password" name="password" value="{{$employee->password}}" class="form-control">
+                                <input type="password" required id="employee_password" name="password" value="" class="form-control">
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Reset Form" class="btn btn-info">

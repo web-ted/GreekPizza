@@ -54,7 +54,7 @@
                                 <td>{{$customer->phone}}</td>
 {{--                                <td>{{$customer->mobile_phone}}</td>--}}
                                 <td>{{$customer->nickname}}</td>
-                                <td>{{$customer->email}}</td>
+                                <td>{{$customer->user()->first()->email}}</td>
 {{--                                <td>{{$customer->password}}</td>--}}
 
                                 <td>

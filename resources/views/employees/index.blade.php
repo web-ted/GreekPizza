@@ -54,7 +54,7 @@
                                 <td>{{$employee->phone}}</td>
 {{--                                <td>{{$employee->mobile_phone}}</td>--}}
                                 <td>{{$employee->nickname}}</td>
-                                <td>{{$employee->email}}</td>
+                                <td>{{$employee->user()->first()->email}}</td>
 {{--                                <td>{{$employee->password}}</td>--}}
 
                                 <td>

@@ -32,6 +32,9 @@
                         <th>Vegetables</th>
                         <th>Sauces</th>
                         <th>Price</th>
+                        @if(Auth::user()->role == 'admin')
+                        <th>User</th>
+                        @endif
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -53,6 +56,10 @@
                                     {{$pizza->ingredients()['sauces']}}
                                 </td>
                                 <td>{{$pizza->price}} &euro;</td>
+                                @if(Auth::user()->role == 'admin')
+                                    <td>{{$pizza->user()->first()->name}}</td>
+                                @endif
+                                @if(Auth::user()->role == 'admin' || $pizza->user_id == Auth::user()->id)
                                 <td>
                                     <a href="/pizza/edit/{{$pizza->id}}" class="btn btn-sm btn-primary">
                                         Edit
@@ -61,6 +68,9 @@
                                         Delete
                                     </a>
                                 </td>
+                                @else
+                                    <td>Store's Product</td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

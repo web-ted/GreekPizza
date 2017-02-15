@@ -19,12 +19,21 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="/pizza/create" method="post" class="form">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="form-group col-md-offset-1 col-md-6">
                                     <label for="pizza_name">Name*</label>
-                                    <input type="text" id="pizza_name" name="name" required class="form-control">
+                                    <input type="text" id="pizza_name" name="name" value="{{old('name')}}" required class="form-control">
                                 </div>
                             </div>
                             <div class="row-fluid">

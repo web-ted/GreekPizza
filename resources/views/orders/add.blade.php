@@ -19,8 +19,18 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="/order/create" method="post" class="form">
                             {{ csrf_field() }}
+                            @if(Auth::user()->role == 'admin')
                             <div class="form-group">
                                 <label for="order_customer_id">Customer*</label>
                                 <select class="form-control" name="customer_id" id="order_customer_id">
@@ -43,14 +53,14 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            @endif
                             <div class="form-group">
                                 <label for="order_pizza_id">Pizza*</label>
                                 <select class="form-control" name="pizza_id" id="order_pizza_id">
                                     <option value="">Select a pizza...</option>
                                     @foreach($pizzas as $pizza)
                                         <option value="{{$pizza->id}}">
-                                            {{$pizza->name}}
+                                            {{$pizza->name}}{{($pizza->user_id!=1)?' (custom)':' (store product)'}}
                                         </option>
                                     @endforeach
                                 </select>

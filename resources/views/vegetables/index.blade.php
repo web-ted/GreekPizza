@@ -28,7 +28,9 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Price</th>
+                        @if(Auth::user()->role == 'admin')
                         <th>Actions</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -37,6 +39,7 @@
                                 <td>{{$vegetable->id}}</td>
                                 <td>{{$vegetable->name}}</td>
                                 <td>{{$vegetable->price}} &euro;</td>
+                                @if(Auth::user()->role == 'admin')
                                 <td>
                                     <a href="/vegetable/edit/{{$vegetable->id}}" class="btn btn-sm btn-primary">
                                         Edit
@@ -45,6 +48,7 @@
                                         Delete
                                     </a>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

@@ -26,10 +26,13 @@
                     <thead>
                     <tr>
                         <th>Id</th>
+                        @if(Auth::user()->role == 'admin')
                         <th>Customer</th>
                         <th>Employee</th>
+                        @endif
                         <th>Pizza</th>
                         <th>Order Date</th>
+                        <th>Price</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -37,10 +40,13 @@
                     @foreach ($orders as $order)
                         <tr>
                             <td>{{$order->id}}</td>
+                            @if(Auth::user()->role == 'admin')
                             <td>{{$order->customer()->first()->firstname}} {{$order->customer()->first()->lastname}}</td>
-                            <td>{{$order->employee()->first()->firstname}} {{$order->employee()->first()->lastname}}</td>
+                            <td>{{isset($order->employee()->first()->firstname)?$order->employee()->first()->firstname:''}} {{isset($order->employee()->first()->lastname)?$order->employee()->first()->lastname:''}}</td>
+                            @endif
                             <td>{{$order->pizza()->first()->name}}</td>
-                            <td>{{$order->created_at}}</td>
+                            <td>{{date("d/m/Y H:i:s", strtotime($order->created_at))}}</td>
+                            <td>{{$order->price}}</td>
                             <td>
                                 <a href="/order/edit/{{$order->id}}" class="btn btn-sm btn-primary">
                                     Edit
