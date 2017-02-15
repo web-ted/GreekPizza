@@ -82,6 +82,7 @@ class PizzaController extends Controller
             $pizza->cheeses()->sum('price'),
             $pizza->vegetables()->sum('price'),
             $pizza->sauces()->sum('price'),
+            2
         ]);
 
         // Set the calculated total price to the pizza model
@@ -167,6 +168,7 @@ class PizzaController extends Controller
             $pizza->cheeses()->sum('price'),
             $pizza->vegetables()->sum('price'),
             $pizza->sauces()->sum('price'),
+            2
         ]);
 
         // Set the sum you have calculated to the model
