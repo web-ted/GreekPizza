@@ -30,7 +30,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        if($order->user_id != Auth::user()->id) {
+        if(($order->user_id != Auth::user()->id) && (Auth::user()->role != 'admin')) {
             return redirect('order');
         }
 
@@ -52,7 +52,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::findOrFail($id);
-        if($order->user_id != Auth::user()->id) {
+        if(($order->user_id != Auth::user()->id) && (Auth::user()->role != 'admin')){
             return redirect('order');
         }
 
@@ -79,7 +79,7 @@ class OrderController extends Controller
     public function delete($id)
     {
         $order = Order::findOrFail($id);
-        if($order->user_id != Auth::user()->id) {
+        if(($order->user_id != Auth::user()->id) && (Auth::user()->role != 'admin')) {
             return redirect('order');
         }
         $order->destroy($id);
