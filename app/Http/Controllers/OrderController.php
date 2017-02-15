@@ -53,15 +53,20 @@ class OrderController extends Controller
 
         $order->pizza_id = $request->get('pizza_id');
         $order->price = Pizza::find($request->get('pizza_id'))->price;
-        if(Auth::user()->role == 'admin') {
+
+        $role = Auth::user()->role;
+        if($role == 'admin') {
             $this->validate($request, [
                 'customer_id' => 'required',
             ]);
             $order->customer_id = $request->get('customer_id');
             $order->employee_id = $request->get('employee_id');
-        } else {
+        } elseif($role == 'customer') {
             $order->customer_id = Customer::where('user_id', Auth::user()->id)->first()->id;
+        } else {
+            $order->customer_id = Employee::where('user_id', Auth::user()->id)->first()->id;
         }
+
         $order->user_id = Auth::user()->id;
         $order->save();
 
@@ -101,14 +106,17 @@ class OrderController extends Controller
         $order->pizza_id = $request->get('pizza_id');
         $order->price = Pizza::find($request->get('pizza_id'))->price;
 
-        if(Auth::user()->role == 'admin') {
+        $role = Auth::user()->role;
+        if($role == 'admin') {
             $this->validate($request, [
                 'customer_id' => 'required',
             ]);
             $order->customer_id = $request->get('customer_id');
             $order->employee_id = $request->get('employee_id');
-        } else {
+        } elseif($role == 'customer') {
             $order->customer_id = Customer::where('user_id', Auth::user()->id)->first()->id;
+        } else {
+            $order->customer_id = Employee::where('user_id', Auth::user()->id)->first()->id;
         }
 
         $order->user_id = Auth::user()->id;
