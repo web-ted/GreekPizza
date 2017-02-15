@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Auth;
 use App\Employee;
 use Illuminate\Http\Request;
@@ -49,10 +50,20 @@ class EmployeeController extends Controller
 
         // Find the employee with id : $id and update its properies with the posted data
         $employee = Employee::findOrFail($id);
-        // $employee->user()->first()->update([$employee])
-        $employee->update($request->all());
 
-        // Redirect borwser to the /employee page (employees index page)
+        // Update the connected user
+        $user = User::findOrFail($employee->user_id);
+        $user->update([
+            'name'     => $request->get('firstname') . ' ' . $request->get('lastname'),
+            'role'     => 'employee',
+            'email'    => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+        ]);
+
+        // Update the employee with the posted data
+        $employee->update($request->except(['email', 'password']));
+
+        // Redirect browser to the /employee page (employees index page)
         return redirect('employee');
     }
 
@@ -84,7 +95,18 @@ class EmployeeController extends Controller
         }
 
         // Create a new employee using the posted data and redirect to employees index page
-        $employee = Employee::create($request->all());
+        $employee = Employee::create($request->except(['email', 'password']));
+        $user = User::create([
+            'name'     => $request->get('firstname') . ' ' . $request->get('lastname'),
+            'role'     => 'employee',
+            'email'    => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+        ]);
+
+        $employee->user_id = $user->id;
+        $employee->save();
+
+
         return redirect('employee');
     }
 }

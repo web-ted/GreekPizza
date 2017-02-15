@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function index()
     {
         // If user is not an admin then redirect him to orders
-        if(Auth::user()->role != 'admin') {
+        if (Auth::user()->role != 'admin') {
             return redirect('order');
         }
         // Retrieve a list of all customers from db
@@ -31,6 +31,10 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->role != 'admin') {
+            return redirect('order');
+        }
+
         // Find the customer with id : $id
         $customer = Customer::findOrFail($id);
 
@@ -40,14 +44,20 @@ class CustomerController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(Auth::user()->role != 'admin') {
+            return redirect('order');
+        }
+
         // Find the customer with id : $id and update its properies with the posted data
         $customer = Customer::findOrFail($id);
-        $user = User::findOrFail(['email' => $customer->email]);
+        $user = User::findOrFail($customer->user_id);
         $user->update([
+            'name'     => $request->get('firstname') . ' ' . $request->get('lastname'),
+            'role'     => 'customer',
             'email'    => $request->get('email'),
             'password' => bcrypt($request->get('password')),
         ]);
-        $customer->update($request->all());
+        $customer->update($request->except(['email', 'password']));
 
 
         // Redirect borwser to the /customer page (customers index page)
@@ -56,6 +66,10 @@ class CustomerController extends Controller
 
     public function delete($id)
     {
+        if(Auth::user()->role != 'admin') {
+            return redirect('order');
+        }
+
         // Delete the customer with id: $id and redirect to customers index page
         Customer::destroy($id);
         return redirect('customer');
@@ -63,18 +77,31 @@ class CustomerController extends Controller
 
     public function add()
     {
+        if(Auth::user()->role != 'admin') {
+            return redirect('order');
+        }
+
         // Show the customers/add.blade.php form for adding a new customer
         return view('customers.add');
     }
 
     public function create(Request $request)
     {
+        if(Auth::user()->role != 'admin') {
+            return redirect('order');
+        }
+
         // Create a new customer using the posted data and redirect to customers index page
-        $customer = Customer::create($request->all());
+        $customer = Customer::create($request->except(['email', 'password']));
         $user = User::create([
+            'name'     => $request->get('firstname') . ' ' . $request->get('lastname'),
+            'role'     => 'customer',
             'email'    => $request->get('email'),
             'password' => bcrypt($request->get('password')),
         ]);
+
+        $customer->user_id = $user->id;
+        $customer->save();
 
         return redirect('customer');
     }

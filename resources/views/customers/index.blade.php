@@ -38,6 +38,7 @@
                         <th>Nickname</th>
                         <th>E-mail Address</th>
                         {{--<th>Password</th>--}}
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
