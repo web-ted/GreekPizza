@@ -48,8 +48,8 @@
                                 <td>{{$order->customer()->first()->firstname}} {{$order->customer()->first()->lastname}}</td>
                                 <td>{{isset($order->employee()->first()->firstname)?$order->employee()->first()->firstname:''}} {{isset($order->employee()->first()->lastname)?$order->employee()->first()->lastname:''}}</td>
                             @endif
-                            <td>{{$order->pizza()->first()->name}}</td>
-                            <td>{{date("d/m/Y H:i:s", strtotime($order->created_at))}}</td>
+                            <td>{{$order->pizza()->first()->name or ''}}</td>
+                            <td>{{date("d/m/Y H:i:s", strtotime($order->created_at)) or ''}}</td>
                             <td>{{$order->price}}</td>
                             @if(Auth::user()->role != 'employee')
                             <td>
